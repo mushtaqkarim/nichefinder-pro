@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NicheFinder Pro - SEO Research Workspace</title>
+<style>
+:root{--blue:#365cf5;--navy:#17264b;--bg:#f4f6fc;--white:#fff;--muted:#718096;--line:#e5e9f2}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Arial,sans-serif;color:#202b45}
+header{background:linear-gradient(120deg,#17264b,#365cf5);color:white;padding:25px max(20px,calc((100% - 1150px)/2))}
+.brand{display:flex;align-items:center;gap:13px}.logo{background:white;color:#365cf5;border-radius:12px;width:44px;height:44px;display:grid;place-items:center;font-size:27px;font-weight:bold}
+h1{font-size:25px;margin:0}header p{margin:5px 0;color:#e0e7ff}
+main{max-width:1150px;margin:25px auto;padding:0 18px}
+.notice{background:#fff8e8;border:1px solid #f0dda8;border-radius:10px;padding:13px;margin-bottom:18px;color:#75591c}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.stat,.card{background:white;border:1px solid var(--line);border-radius:13px;padding:18px}
+.stat strong{display:block;font-size:27px;color:#263c87}.stat span{font-size:13px;color:var(--muted)}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}
+nav button,.btn{border:0;border-radius:8px;padding:11px 15px;cursor:pointer;font-weight:bold;background:#e9edff;color:#2949c5}
+nav button.active,.btn.primary{background:var(--blue);color:white}
+.panel{display:none}.panel.active{display:block}.card{margin-bottom:15px}
+h2{margin:0 0 7px;font-size:21px}h3{margin:0 0 12px}.muted{color:var(--muted);font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}
+label{font-size:13px;font-weight:bold;display:block;margin-bottom:5px}
+input,select,textarea{width:100%;padding:11px;border:1px solid #dce2ef;border-radius:8px;font:inherit;background:white}
+textarea{min-height:80px}.field{margin-bottom:12px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.btn.gray{background:#edf0f6;color:#35415b}.btn.red{background:#fff0f0;color:#b33333}
+.tablewrap{overflow-x:auto;margin-top:12px}table{border-collapse:collapse;width:100%;min-width:650px;background:white}
+th,td{text-align:left;border-bottom:1px solid var(--line);padding:11px;font-size:13px}
+th{background:#f7f8fc;color:#63708a}td button{padding:6px 9px}
+.empty{padding:20px;text-align:center;color:var(--muted)}
+footer{text-align:center;color:var(--muted);padding:25px;font-size:13px}
+@media(max-width:650px){.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}header{padding:20px}h1{font-size:21px}}
+</style>
+</head>
+<body>
+<header>
+ <div class="brand"><div class="logo">N</div><div>
+ <h1>NicheFinder Pro</h1>
+ <p>Find Profitable Niches • Better Keywords • Smarter Content</p>
+ </div></div>
+</header>
+<main>
+<div class="notice"><b>Research honesty:</b> This tool does not fetch live SEO metrics. Enter verified data from your research sources. Unknown metrics stay blank.</div>
+<div class="stats">
+ <div class="stat"><strong id="ns">0</strong><span>Saved Niches</span></div>
+ <div class="stat"><strong id="ks">0</strong><span>Saved Keywords</span></div>
+ <div class="stat"><strong id="cs">0</strong><span>Competitors</span></div>
+ <div class="stat"><strong id="vs">0</strong><span>Verified Records</span></div>
+</div>
+<nav>
+ <button class="active" data-page="dashboard">Dashboard</button>
+ <button data-page="niches">Niche Finder</button>
+ <button data-page="keywords">Keyword Research</button>
+ <button data-page="competitors">Competitors</button>
+ <button data-page="inventory">Inventory</button>
+</nav>
+
+<section id="dashboard" class="panel active">
+ <div class="card">
+ <h2>Welcome to NicheFinder Pro</h2>
+ <p class="muted">Your personal SEO research workspace. Organize blogging ideas, keywords and competitor research in one place.</p>
+ <h3>How to use</h3>
+ <ol><li>Add a niche idea in Niche Finder.</li><li>Save researched keywords and their metrics.</li><li>Track competitor websites.</li><li>Export your research as CSV or JSON backup.</li></ol>
+ </div>
+ <div class="card"><h3>Recent activity</h3><div id="activity" class="empty">No research saved yet.</div></div>
+</section>
+
+<section id="niches" class="panel">
+ <div class="card">
+ <h2>Niche Finder</h2><p class="muted">Save and evaluate your blogging niche ideas.</p>
+ <div class="grid">
+ <div class="field"><label>Niche name *</label><input id="nName" placeholder="Example: Home energy calculators"></div>
+ <div class="field"><label>Target country</label><input id="nCountry" placeholder="United States"></div>
+ <div class="field"><label>Main keyword</label><input id="nKeyword" placeholder="Primary keyword"></div>
+ <div class="field"><label>Search volume</label><input id="nVolume" type="number" min="0" placeholder="Verified monthly volume"></div>
+ <div class="field"><label>Keyword Difficulty</label><input id="nKD" type="number" min="0" max="100" placeholder="0-100"></div>
+ <div class="field"><label>Monetization</label><select id="nMoney"><option value="">Choose</option><option>Display Ads</option><option>Affiliate Marketing</option><option>Digital Products</option><option>Lead Generation</option><option>Multiple</option></select></div>
+ <div class="field"><label>Research source</label><input id="nSource" placeholder="Ahrefs, Semrush, etc."></div>
+ <div class="field"><label>Research date</label><input id="nDate" type="date"></div>
+ </div>
+ <div class="field"><label>Notes</label><textarea id="nNotes" placeholder="Evidence, search intent, content opportunities..."></textarea></div>
+ <div class="actions"><button class="btn primary" onclick="addNiche()">Save Niche</button></div>
+ </div>
+ <div class="card"><h3>Saved Niches</h3><div id="nTable"></div></div>
+</section>
+
+<section id="keywords" class="panel">
+ <div class="card">
+ <h2>Keyword Research</h2><p class="muted">Save keyword metrics from your SEO research.</p>
+ <div class="grid">
+ <div class="field"><label>Keyword *</label><input id="kWord" placeholder="Example: best home energy calculator"></div>
+ <div class="field"><label>Target country</label><input id="kCountry" placeholder="United States"></div>
+ <div class="field"><label>Search volume</label><input id="kVolume" type="number" min="0" placeholder="Monthly searches"></div>
+ <div class="field"><label>KD (%)</label><input id="kKD" type="number" min="0" max="100" placeholder="0-100"></div>
+ <div class="field"><label>CPC</label><input id="kCPC" type="number" min="0" step=".01" placeholder="Optional"></div>
+ <div class="field"><label>Search intent</label><select id="kIntent"><option>Informational</option><option>Commercial</option><option>Transactional</option><option>Navigational</option><option>Mixed</option></select></div>
+ <div class="field"><label>Research source</label><input id="kSource" placeholder="Ahrefs, Semrush, etc."></div>
+ <div class="field"><label>Date checked</label><input id="kDate" type="date"></div>
+ </div>
+ <div class="actions"><button class="btn primary" onclick="addKeyword()">Save Keyword</button></div>
+ </div>
+ <div class="card"><h3>Saved Keywords</h3><div id="kTable"></div></div>
+</section>
+
+<section id="competitors" class="panel">
+ <div class="card">
+ <h2>Competitor Analysis</h2><p class="muted">Track competitor websites and manually verified metrics.</p>
+ <div class="grid">
+ <div class="field"><label>Domain *</label><input id="cDomain" placeholder="example.com"></div>
+ <div class="field"><label>Niche</label><input id="cNiche" placeholder="Website topic"></div>
+ <div class="field"><label>Domain Rating (DR)</label><input id="cDR" type="number" min="0" max="100" placeholder="Verified DR"></div>
+ <div class="field"><label>Organic traffic</label><input id="cTraffic" type="number" min="0" placeholder="Verified traffic"></div>
+ <div class="field"><label>Research source</label><input id="cSource" placeholder="Ahrefs, Semrush, etc."></div>
+ <div class="field"><label>Date checked</label><input id="cDate" type="date"></div>
+ </div>
+ <div class="actions"><button class="btn primary" onclick="addCompetitor()">Save Competitor</button></div>
+ </div>
+ <div class="card"><h3>Saved Competitors</h3><div id="cTable"></div></div>
+</section>
+
+<section id="inventory" class="panel">
+ <div class="card">
+ <h2>Research Inventory</h2><p class="muted">Download your research or create a backup.</p>
+ <div class="actions">
+ <button class="btn primary" onclick="csv('niches')">Niches CSV</button>
+ <button class="btn primary" onclick="csv('keywords')">Keywords CSV</button>
+ <button class="btn primary" onclick="csv('competitors')">Competitors CSV</button>
+ <button class="btn" onclick="backup()">Full JSON Backup</button>
+ <label class="btn gray" for="restoreFile">Restore Backup</label>
+ <input hidden id="restoreFile" type="file" accept=".json" onchange="restore(event)">
+ </div>
+ <p class="muted">Data is saved in this browser on this device. Download backups regularly. Clearing browser data may erase records.</p>
+ <button class="btn red" onclick="clearAll()">Delete all records</button>
+ </div>
+ <div class="card"><h3>Inventory summary</h3><div id="summary"></div></div>
+</section>
+</main>
+<footer>NicheFinder Pro · Free SEO Research Workspace</footer>
+
+<script>
+const KEY="nichefinderProData";
+let db={niches:[],keywords:[],competitors:[]};
+try{let old=JSON.parse(localStorage.getItem(KEY));if(old)db=old}catch(e){}
+const $=id=>document.getElementById(id);
+const v=id=>$(id).value.trim();
+function clean(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function persist(){localStorage.setItem(KEY,JSON.stringify(db));render()}
+function addNiche(){
+ if(!v("nName"))return alert("Enter a niche name.");
+ db.niches.push({name:v("nName"),country:v("nCountry"),keyword:v("nKeyword"),volume:v("nVolume"),kd:v("nKD"),monetization:v("nMoney"),source:v("nSource"),date:v("nDate"),notes:v("nNotes"),verified:!!(v("nSource")&&v("nDate"))});
+ ["nName","nCountry","nKeyword","nVolume","nKD","nMoney","nSource","nDate","nNotes"].forEach(x=>$(x).value="");persist();
+}
+function addKeyword(){
+ if(!v("kWord"))return alert("Enter a keyword.");
+ db.keywords.push({keyword:v("kWord"),country:v("kCountry"),volume:v("kVolume"),kd:v("kKD"),cpc:v("kCPC"),intent:v("kIntent"),source:v("kSource"),date:v("kDate"),verified:!!(v("kSource")&&v("kDate"))});
+ ["kWord","kCountry","kVolume","kKD","kCPC","kSource","kDate"].forEach(x=>$(x).value="");persist();
+}
+function addCompetitor(){
+ if(!v("cDomain"))return alert("Enter a domain.");
+ db.competitors.push({domain:v("cDomain"),niche:v("cNiche"),dr:v("cDR"),traffic:v("cTraffic"),source:v("cSource"),date:v("cDate"),verified:!!(v("cSource")&&v("cDate"))});
+ ["cDomain","cNiche","cDR","cTraffic","cSource","cDate"].forEach(x=>$(x).value="");persist();
+}
+function makeTable(items,cols,type){
+ if(!items.length)return '<div class="empty">No records saved yet.</div>';
+ return '<div class="tablewrap"><table><thead><tr>'+cols.map(c=>'<th>'+c[1]+'</th>').join('')+'<th>Action</th></tr></thead><tbody>'+items.map((r,i)=>'<tr>'+cols.map(c=>'<td>'+clean(r[c[0]]||"—")+'</td>').join('')+'<td><button class="btn red" onclick="removeItem(\''+type+'\','+i+')">Delete</button></td></tr>').join('')+'</tbody></table></div>';
+}
+function removeItem(type,i){if(confirm("Delete this record?")){db[type].splice(i,1);persist()}}
+function render(){
+ $("ns").textContent=db.niches.length;$("ks").textContent=db.keywords.length;$("cs").textContent=db.competitors.length;
+ $("vs").textContent=[...db.niches,...db.keywords,...db.competitors].filter(x=>x.verified).length;
+ $("nTable").innerHTML=makeTable(db.niches,[["name","Niche"],["country","Country"],["keyword","Main keyword"],["volume","Volume"],["kd","KD"],["monetization","Monetization"],["source","Source"]],"niches");
+ $("kTable").innerHTML=makeTable(db.keywords,[["keyword","Keyword"],["country","Country"],["volume","Volume"],["kd","KD"],["cpc","CPC"],["intent","Intent"],["source","Source"]],"keywords");
+ $("cTable").innerHTML=makeTable(db.competitors,[["domain","Domain"],["niche","Niche"],["dr","DR"],["traffic","Traffic"],["source","Source"]],"competitors");
+ let recent=[...db.niches.slice(-2).map(x=>"Niche: "+x.name),...db.keywords.slice(-2).map(x=>"Keyword: "+x.keyword),...db.competitors.slice(-2).map(x=>"Competitor: "+x.domain)];
+ $("activity").innerHTML=recent.length?recent.reverse().map(x=>"<p>"+clean(x)+"</p>").join(""):"No research saved yet.";
+ $("summary").textContent=db.niches.length+" niches · "+db.keywords.length+" keywords · "+db.competitors.length+" competitors";
+}
+function download(name,data,type){let a=document.createElement("a"),u=URL.createObjectURL(new Blob([data],{type}));a.href=u;a.download=name;a.click();URL.revokeObjectURL(u)}
+function csv(type){
+ let rows=db[type];if(!rows.length)return alert("No records to export.");
+ let keys=[...new Set(rows.flatMap(Object.keys))];
+ let out=[keys.join(","),...rows.map(r=>keys.map(k=>'"'+String(r[k]??"").replace(/"/g,'""')+'"').join(","))].join("\r\n");
+ download(type+".csv",out,"text/csv");
+}
+function backup(){download("nichefinder-pro-backup.json",JSON.stringify(db,null,2),"application/json")}
+function restore(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);if(!Array.isArray(x.niches)||!Array.isArray(x.keywords)||!Array.isArray(x.competitors))throw Error();db=x;persist();alert("Backup restored.")}catch(err){alert("Invalid backup file.")}};r.readAsText(f);e.target.value=""}
+function clearAll(){if(confirm("Delete all saved records?")){db={niches:[],keywords:[],competitors:[]};persist()}}
+document.querySelectorAll("nav button").forEach(b=>b.addEventListener("click",()=>{
+ document.querySelectorAll("nav button").forEach(x=>x.classList.remove("active"));
+ document.querySelectorAll(".panel").forEach(x=>x.classList.remove("active"));
+ b.classList.add("active");$(b.dataset.page).classList.add("active");
+}));
+render();
+</script>
+</body>
+</html>
